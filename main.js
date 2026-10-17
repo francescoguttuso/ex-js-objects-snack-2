@@ -139,10 +139,10 @@ const secondBurger = { ...hamburger };
 secondBurger.maker.restaurant = newRestaurant;
 secondBurger.maker.name = "Chef Hyur";
 
-console.log(hamburger.maker.name);
-console.log(secondBurger.maker.name);
-console.log(hamburger.maker.restaurant.name);
-console.log(secondBurger.maker.restaurant.name);
+console.log(hamburger.maker.name); //Chef Hyur
+console.log(secondBurger.maker.name); //Chef Hyur
+console.log(hamburger.maker.restaurant.name); //"Hyur's II"
+console.log(secondBurger.maker.restaurant.name); //"Hyur's II"
 
 /*
 Domanda:
@@ -152,8 +152,10 @@ Domanda:
 
 Risposta:
 
-1 
-2 
+1 i risultati dei console.log sono Chef Hyur per i primi due e Hyur's II per gli altri due.
+2 Sono stati creati in totale 5 oggetti: 
+3 per hamburger, 1 per newRestaurant e uno per secondBurger
+ perchè la copia superficiale lascia maker e restaurant come riferimento del primo oggetto 
 */
 
 //Code Question 6 (Bonus)
@@ -179,3 +181,13 @@ const chef = {
     isOpen: true,
   },
 };
+
+/*
+
+Domanda:
+1 Qual è il metodo migliore per clonare l’oggetto chef, e perché?
+
+Risposta:
+1 Spreed operator è il metodo migliore per copiare questo oggetto che mi permette
+  di copiare la proprietà che contiene il riferimento alla funzione, cosa che con structuredClone e 
+  JASONparse(JASONstringify()) non posso fare.
