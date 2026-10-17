@@ -191,3 +191,53 @@ Risposta:
 1 Spreed operator è il metodo migliore per copiare questo oggetto che mi permette
   di copiare la proprietà che contiene il riferimento alla funzione, cosa che con structuredClone e 
   JASONparse(JASONstringify()) non posso fare.
+
+*/
+
+/*
+🎯 Snack  (Bonus)
+Crea una funzione che permette la copia profonda (deep copy) di un oggetto, 
+che copia anche i suoi metodi (proprietà che contengono funzioni).
+Usa l’oggetto di Code Question 6 come test.
+*/
+
+const chef = {
+  name: "Chef Hyur",
+  age: 29,
+  makeBurger: (num = 1) => {
+    console.log(`Ecco ${num} hamburger per te!`);
+  },
+  restaurant: {
+    name: "Hyur's Burgers",
+    welcomeClient: () => {
+      console.log("Benvenuto!");
+    },
+    address: {
+      street: "Main Street",
+      number: 123,
+      showAddress: () => {
+        console.log("Main Street 123");
+      },
+    },
+    isOpen: true,
+  },
+};
+
+function deepCopy(obj) {
+  //verifichiamo che obj non è null e sia diverso da object
+  if (obj === null || typeof obj !== "object") {
+    return obj;
+  }
+
+  const copy = {}; // creiamo l'oggetto vuoto
+
+  //copiamo ogni proprietà con un ciclo for in
+  for (const key in obj) {
+    //condizione che mi permette di copiare solo le proprietà appartenenti direttamente a obj.
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      copy[key] = deepCopy(obj[key]);
+    }
+  }
+
+  return copy;
+}
