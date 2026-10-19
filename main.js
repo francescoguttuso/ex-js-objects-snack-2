@@ -223,43 +223,19 @@ const chef = {
   },
 };
 
-/*function deepCopy(obj) {
-  //verifichiamo che obj non è null e sia diverso da object
-  if (obj === null || typeof obj !== "object") {
-    return obj;
-  }
-
-  const copy = {}; // creiamo l'oggetto vuoto
-
-  //copiamo ogni proprietà con un ciclo for in
-  for (const key in obj) {
-    //condizione che mi permette di copiare solo le proprietà appartenenti direttamente a obj.
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      copy[key] = deepCopy(obj[key]);
-    }
-  }
-
-  return copy;
-}
-*/
 function deepClone(obj) {
-  // Se non è un oggetto (es. primitivi o null/undefined), lo restituisce così com'è
   if (obj === null || typeof obj !== "object") {
     return obj;
   }
 
-  // Gestione degli array
   if (Array.isArray(obj)) {
     return obj.map((item) => deepClone(item));
   }
 
-  // Gestione degli oggetti normali e delle funzioni (metodi)
   const clone = {};
-  for (const key of Object.keys(obj)) {
-    const value = obj[key];
 
-    // Se è una funzione la copiamo direttamente, altrimenti scendiamo in ricorsione
-    clone[key] = typeof value === "function" ? value : deepClone(value);
+  for (const key of Object.keys(obj)) {
+    clone[key] = deepClone(obj[key]);
   }
 
   return clone;
